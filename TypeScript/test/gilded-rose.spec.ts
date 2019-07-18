@@ -4,6 +4,12 @@ import { Item, GildedRose } from '../app/gilded-rose';
 describe('Gilded Rose', function () {
 
     it('Once the sell by date has passed, Quality degrades twice as fast', function() {
+        const gildedRose = new GildedRose();
+        const items = gildedRose.updateQuality();
+        expect(items.length).to.equal(0);
+    });
+
+    it('Once the sell by date has passed, Quality degrades twice as fast', function() {
         const gildedRose = new GildedRose([ new Item('foo', 0, 3) ]);
         const items = gildedRose.updateQuality();
         expect(items[0].sellIn).to.equal(-1);
