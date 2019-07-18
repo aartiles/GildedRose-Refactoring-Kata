@@ -21,8 +21,6 @@ describe('Gilded Rose', function () {
     const gildedRose = new GildedRose(items);
     var days: number = 2;
     for (let i = 0; i < days; i++) {
-        console.log("-------- day " + i + " --------");
-        console.log("name, sellIn, quality");
         items.forEach(element => {
             lines.push(element);
         });
@@ -30,6 +28,14 @@ describe('Gilded Rose', function () {
     }
   
     const goldenMaster = readFileSync('test/golden-master.json');
+
+    console.log('*************');
+    console.log('Golden Master:');
+    console.log(goldenMaster.toString('UTF8'));
+    console.log('*************');
+    console.log('New results:');
+    console.log(JSON.stringify(lines));
+
     expect(goldenMaster.toString('UTF8'), JSON.stringify(lines));
   });
 });
