@@ -1,4 +1,5 @@
 import { Item, GildedRose } from '../app/gilded-rose';
+import { writeFileSync } from 'fs';
 
 const items = [
     new Item("+5 Dexterity Vest", 10, 20), //
@@ -13,15 +14,15 @@ const items = [
     new Item("Conjured Mana Cake", 3, 6)];
 
 
+const lines: Array<Item> = [];
 const gildedRose = new GildedRose(items);
 var days: number = 2;
 for (let i = 0; i < days; i++) {
     console.log("-------- day " + i + " --------");
     console.log("name, sellIn, quality");
     items.forEach(element => {
-        console.log(element.name + ' ' + element.sellIn + ' ' + element.quality);
-
+        lines.push(element);
     });
-    console.log();
     gildedRose.updateQuality();
 }
+writeFileSync('test/golden-master.json', JSON.stringify(lines));

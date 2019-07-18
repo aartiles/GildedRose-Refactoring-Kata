@@ -16,6 +16,13 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.equal(0);
     });
 
+    it('Cover line 60', function() {
+        const gildedRose = new GildedRose([ new Item('Aged Brie', -1, 51) ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).to.equal(-2);
+        expect(items[0].quality).to.equal(51);
+    });
+
     it('Once the sell by date has passed, Quality degrades twice as fast', function() {
         const gildedRose = new GildedRose([ new Item('foo', 0, 3) ]);
         const items = gildedRose.updateQuality();
