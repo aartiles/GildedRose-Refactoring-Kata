@@ -11,6 +11,9 @@ export class Item {
         if (name === 'Aged Brie') {
             this.good = new AgedBrie(name, sellIn, quality);
         }
+        else if (name === 'Backstage passes to a TAFKAL80ETC concert') {
+            this.good = new BackstagePass(name, sellIn, quality);
+        }
         else this.good = new Good(name, sellIn, quality);
     }
 
@@ -22,7 +25,9 @@ export class Item {
             this.sellIn = this.good.sellIn();
         }
         else if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
-            this.updateBackstagePasses();
+            this.good.update();
+            this.quality = this.good.quality();
+            this.sellIn = this.good.sellIn();
         }
         else {
             this.updateStandardItem();
@@ -104,6 +109,16 @@ class AgedBrie extends Good {
         this.updateSellIn();
         this.increaseQuality();
         if (this._sellIn < 0) this.increaseQuality();
+    }
+}
+
+class BackstagePass extends Good {
+    update() {
+        this.updateSellIn();
+        this.increaseQuality();
+        if (this._sellIn < 11) this.increaseQuality();
+        if (this._sellIn < 6) this.increaseQuality();
+        if (this._sellIn < 0) this._quality = 0;
     }
 }
 
