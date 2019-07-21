@@ -36,7 +36,12 @@ export class Item {
         }
         this.updateSellIn();
         if (this.sellIn < 0) {
-            if (this.name != 'Aged Brie') {
+            if (this.name === 'Aged Brie') {
+                if (this.quality < 50) {
+                    this.increaseQuality();
+                }
+            }
+            else {
                 if (this.name != 'Backstage passes to a TAFKAL80ETC concert') {
                     if (this.quality > 0) {
                         if (this.name != 'Sulfuras, Hand of Ragnaros') {
@@ -46,11 +51,6 @@ export class Item {
                 }
                 else {
                     this.quality = this.quality - this.quality;
-                }
-            }
-            else {
-                if (this.quality < 50) {
-                    this.increaseQuality();
                 }
             }
         }
