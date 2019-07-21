@@ -14,24 +14,16 @@ export class Item {
         else if (name === 'Backstage passes to a TAFKAL80ETC concert') {
             this.good = new BackstagePass(name, sellIn, quality);
         }
+        else if (name === 'Sulfuras, Hand of Ragnaros') {
+            this.good = new LegendaryItem(name, sellIn, quality);
+        }
         else this.good = new Good(name, sellIn, quality);
     }
 
     update() {
-        this.updateSellIn();
-        if (this.name === 'Aged Brie') {
-            this.good.update();
-            this.quality = this.good.quality();
-            this.sellIn = this.good.sellIn();
-        }
-        else if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
-            this.good.update();
-            this.quality = this.good.quality();
-            this.sellIn = this.good.sellIn();
-        }
-        else {
-            this.updateStandardItem();
-        }
+        this.good.update();
+        this.quality = this.good.quality();
+        this.sellIn = this.good.sellIn();
     }
 
     private updateStandardItem() {
@@ -119,6 +111,11 @@ class BackstagePass extends Good {
         if (this._sellIn < 11) this.increaseQuality();
         if (this._sellIn < 6) this.increaseQuality();
         if (this._sellIn < 0) this._quality = 0;
+    }
+}
+
+class LegendaryItem extends Good {
+    update() {
     }
 }
 
