@@ -10,6 +10,7 @@ export class Item {
     }
 
     update() {
+        this.updateSellIn();
         if (this.name === 'Aged Brie') {
             this.increaseQuality();
         }
@@ -19,16 +20,12 @@ export class Item {
         else {
             this.decreaseQuality();
         }
-        this.updateSellIn();
         if (this.sellIn < 0) {
             if (this.name === 'Aged Brie') {
                 this.increaseQuality();
             }
             else {
-                if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
-                    this.quality = this.quality - this.quality;
-                }
-                else {
+                if (this.name !== 'Backstage passes to a TAFKAL80ETC concert') {
                     this.decreaseQuality();
                 }
             }
@@ -42,6 +39,9 @@ export class Item {
         }
         if (this.sellIn < 6) {
             this.increaseQuality();
+        }
+        if (this.sellIn < 0) {
+            this.quality = 0;
         }
     }
 
