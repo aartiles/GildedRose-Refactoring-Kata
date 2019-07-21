@@ -17,6 +17,9 @@ export class Item {
         else if (name === 'Sulfuras, Hand of Ragnaros') {
             this.good = new LegendaryItem(name, sellIn, quality);
         }
+        else if (name === 'Conjured') {
+            this.good = new Conjured(name, sellIn, quality);
+        }
         else this.good = new Good(name, sellIn, quality);
     }
 
@@ -48,7 +51,7 @@ class Good {
         if (this._quality < 50) this._quality = this._quality + 1;
     }
 
-    private decreaseQuality() {
+    protected decreaseQuality() {
         if (this._quality > 0) this._quality = this._quality - 1;
     }
 
@@ -79,6 +82,18 @@ class BackstagePass extends Good {
 
 class LegendaryItem extends Good {
     update() {
+    }
+}
+
+class Conjured extends Good {
+    update() {
+        this.updateSellIn();
+        this.decreaseQuality();
+        this.decreaseQuality();
+        if (this._sellIn < 0) {
+            this.decreaseQuality();
+            this.decreaseQuality();
+        }
     }
 }
 

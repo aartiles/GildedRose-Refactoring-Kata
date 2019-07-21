@@ -86,11 +86,17 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.equal(0);
     });
 
-    xit('"Conjured" items degrade in Quality twice as fast as normal items', function() {
+    it('"Conjured" items degrade in Quality twice as fast as normal items', function() {
         const gildedRose = new GildedRose([ new Item('Conjured', 1, 3) ]);
         const items = gildedRose.updateQuality();
         expect(items[0].sellIn).to.equal(0);
         expect(items[0].quality).to.equal(1);
     });
 
+    it('"Conjured" items degrade in Quality twice as fast as normal items also when sell by date has passed', function() {
+        const gildedRose = new GildedRose([ new Item('Conjured', 0, 6) ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).to.equal(-1);
+        expect(items[0].quality).to.equal(2);
+    });
 });
