@@ -12,7 +12,7 @@ export class Item {
     update() {
         this.updateSellIn();
         if (this.name === 'Aged Brie') {
-            this.increaseQuality();
+            this.updateAgedBrie();
         }
         else if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
             this.updateBackstagePasses();
@@ -21,10 +21,7 @@ export class Item {
             this.decreaseQuality();
         }
         if (this.sellIn < 0) {
-            if (this.name === 'Aged Brie') {
-                this.increaseQuality();
-            }
-            else {
+            if (this.name !== 'Aged Brie') {
                 if (this.name !== 'Backstage passes to a TAFKAL80ETC concert') {
                     this.decreaseQuality();
                 }
@@ -43,6 +40,11 @@ export class Item {
         if (this.sellIn < 0) {
             this.quality = 0;
         }
+    }
+
+    private updateAgedBrie() {
+        this.increaseQuality();
+        if (this.sellIn < 0) this.increaseQuality();
     }
 
     private decreaseQuality() {
