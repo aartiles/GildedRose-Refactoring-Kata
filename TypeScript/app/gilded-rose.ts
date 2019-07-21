@@ -34,9 +34,7 @@ export class Item {
                 }
             }
         }
-        if (this.name != 'Sulfuras, Hand of Ragnaros') {
-            this.sellIn = this.sellIn - 1;
-        }
+        this.updateSellIn();
         if (this.sellIn < 0) {
             if (this.name != 'Aged Brie') {
                 if (this.name != 'Backstage passes to a TAFKAL80ETC concert') {
@@ -55,6 +53,12 @@ export class Item {
                     this.quality = this.quality + 1;
                 }
             }
+        }
+    }
+
+    private updateSellIn() {
+        if (this.name != 'Sulfuras, Hand of Ragnaros') {
+            this.sellIn = this.sellIn - 1;
         }
     }
 }
