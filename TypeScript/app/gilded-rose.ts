@@ -22,9 +22,7 @@ export class Item {
             }
         }
         else {
-            if (this.name != 'Sulfuras, Hand of Ragnaros') {
-                this.decreaseQuality();
-            }
+            this.decreaseQuality();
         }
         this.updateSellIn();
         if (this.sellIn < 0) {
@@ -36,16 +34,14 @@ export class Item {
                     this.quality = this.quality - this.quality;
                 }
                 else {
-                    if (this.name != 'Sulfuras, Hand of Ragnaros') {
-                        this.decreaseQuality();
-                    }
+                    this.decreaseQuality();
                 }
             }
         }
     }
 
     private decreaseQuality() {
-        if (this.quality > 0) this.quality = this.quality - 1;
+        if (this.quality > 0 && this.name !== 'Sulfuras, Hand of Ragnaros') this.quality = this.quality - 1;
     }
 
     private increaseQuality() {
@@ -53,7 +49,7 @@ export class Item {
     }
 
     private updateSellIn() {
-        if (this.name != 'Sulfuras, Hand of Ragnaros') {
+        if (this.name !== 'Sulfuras, Hand of Ragnaros') {
             this.sellIn = this.sellIn - 1;
         }
     }
