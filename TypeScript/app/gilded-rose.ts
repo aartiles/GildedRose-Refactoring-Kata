@@ -25,43 +25,6 @@ export class Item {
         this.quality = this.good.quality();
         this.sellIn = this.good.sellIn();
     }
-
-    private updateStandardItem() {
-        this.decreaseQuality();
-        if (this.sellIn < 0) this.decreaseQuality();
-    }
-
-    private updateBackstagePasses() {
-        this.increaseQuality();
-        if (this.sellIn < 11) {
-            this.increaseQuality();
-        }
-        if (this.sellIn < 6) {
-            this.increaseQuality();
-        }
-        if (this.sellIn < 0) {
-            this.quality = 0;
-        }
-    }
-
-    private updateAgedBrie() {
-        this.increaseQuality();
-        if (this.sellIn < 0) this.increaseQuality();
-    }
-
-    private decreaseQuality() {
-        if (this.quality > 0 && this.name !== 'Sulfuras, Hand of Ragnaros') this.quality = this.quality - 1;
-    }
-
-    private increaseQuality() {
-        if (this.quality < 50) this.quality = this.quality + 1;
-    }
-
-    private updateSellIn() {
-        if (this.name !== 'Sulfuras, Hand of Ragnaros') {
-            this.sellIn = this.sellIn - 1;
-        }
-    }
 }
 
 class Good {
