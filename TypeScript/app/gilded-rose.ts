@@ -35,8 +35,8 @@ class Good {
 
     update(): void {
         this.updateSellIn();
-        this.decreaseQuality();
-        if (this._sellIn < 0) this.decreaseQuality();
+        if (this._sellIn < 0) this.decreaseQuality(2);
+        else this.decreaseQuality();
     }
 
     sellIn(): number {
@@ -47,12 +47,12 @@ class Good {
         return this._quality;
     }
 
-    protected increaseQuality() {
-        if (this._quality < 50) this._quality = this._quality + 1;
+    protected increaseQuality(by: number = 1) {
+        this._quality = Math.min(this._quality + by, 50);
     }
 
-    protected decreaseQuality() {
-        if (this._quality > 0) this._quality = this._quality - 1;
+    protected decreaseQuality(by: number = 1) {
+        this._quality = Math.max(0, this._quality - by);
     }
 
     protected updateSellIn() {
@@ -64,9 +64,9 @@ class Good {
 
 class AgedBrie extends Good {
     update() {
-        this.updateSellIn();
-        this.increaseQuality();
-        if (this._sellIn < 0) this.increaseQuality();
+        this.updateSellIn();        
+        if (this._sellIn < 0) this.increaseQuality(2);
+        else this.increaseQuality();
     }
 }
 
@@ -88,12 +88,8 @@ class LegendaryItem extends Good {
 class Conjured extends Good {
     update() {
         this.updateSellIn();
-        this.decreaseQuality();
-        this.decreaseQuality();
-        if (this._sellIn < 0) {
-            this.decreaseQuality();
-            this.decreaseQuality();
-        }
+        if (this._sellIn < 0) this.decreaseQuality(4);
+        else this.decreaseQuality(2);
     }
 }
 
