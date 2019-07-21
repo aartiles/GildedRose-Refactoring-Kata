@@ -18,15 +18,13 @@ export class Item {
             this.updateBackstagePasses();
         }
         else {
-            this.decreaseQuality();
+            this.updateStandardItem();
         }
-        if (this.sellIn < 0) {
-            if (this.name !== 'Aged Brie') {
-                if (this.name !== 'Backstage passes to a TAFKAL80ETC concert') {
-                    this.decreaseQuality();
-                }
-            }
-        }
+    }
+
+    private updateStandardItem() {
+        this.decreaseQuality();
+        if (this.sellIn < 0) this.decreaseQuality();
     }
 
     private updateBackstagePasses() {
