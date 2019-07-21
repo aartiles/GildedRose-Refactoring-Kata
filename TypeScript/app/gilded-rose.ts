@@ -10,16 +10,11 @@ export class Item {
     }
 
     update() {
-        if (this.name === 'Aged Brie' || this.name === 'Backstage passes to a TAFKAL80ETC concert') {
+        if (this.name === 'Aged Brie') {
             this.increaseQuality();
-            if (this.name == 'Backstage passes to a TAFKAL80ETC concert') {
-                if (this.sellIn < 11) {
-                    this.increaseQuality();
-                }
-                if (this.sellIn < 6) {
-                    this.increaseQuality();
-                }
-            }
+        }
+        else if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
+            this.updateBackstagePasses();
         }
         else {
             this.decreaseQuality();
@@ -37,6 +32,16 @@ export class Item {
                     this.decreaseQuality();
                 }
             }
+        }
+    }
+
+    private updateBackstagePasses() {
+        this.increaseQuality();
+        if (this.sellIn < 11) {
+            this.increaseQuality();
+        }
+        if (this.sellIn < 6) {
+            this.increaseQuality();
         }
     }
 
