@@ -11,45 +11,33 @@ export class Item {
 
     update() {
         if (this.name === 'Aged Brie' || this.name === 'Backstage passes to a TAFKAL80ETC concert') {
-            if (this.quality < 50) {
-                this.increaseQuality();
-                if (this.name == 'Backstage passes to a TAFKAL80ETC concert') {
-                    if (this.sellIn < 11) {
-                        if (this.quality < 50) {
-                            this.increaseQuality();
-                        }
-                    }
-                    if (this.sellIn < 6) {
-                        if (this.quality < 50) {
-                            this.increaseQuality();
-                        }
-                    }
+            this.increaseQuality();
+            if (this.name == 'Backstage passes to a TAFKAL80ETC concert') {
+                if (this.sellIn < 11) {
+                    this.increaseQuality();
+                }
+                if (this.sellIn < 6) {
+                    this.increaseQuality();
                 }
             }
         }
         else {
-            if (this.quality > 0) {
-                if (this.name != 'Sulfuras, Hand of Ragnaros') {
-                    this.decreaseQuality();
-                }
+            if (this.name != 'Sulfuras, Hand of Ragnaros') {
+                this.decreaseQuality();
             }
         }
         this.updateSellIn();
         if (this.sellIn < 0) {
             if (this.name === 'Aged Brie') {
-                if (this.quality < 50) {
-                    this.increaseQuality();
-                }
+                this.increaseQuality();
             }
             else {
                 if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
                     this.quality = this.quality - this.quality;
                 }
                 else {
-                    if (this.quality > 0) {
-                        if (this.name != 'Sulfuras, Hand of Ragnaros') {
-                            this.decreaseQuality();
-                        }
+                    if (this.name != 'Sulfuras, Hand of Ragnaros') {
+                        this.decreaseQuality();
                     }
                 }
             }
@@ -57,11 +45,11 @@ export class Item {
     }
 
     private decreaseQuality() {
-        this.quality = this.quality - 1;
+        if (this.quality > 0) this.quality = this.quality - 1;
     }
 
     private increaseQuality() {
-        this.quality = this.quality + 1;
+        if (this.quality < 50) this.quality = this.quality + 1;
     }
 
     private updateSellIn() {
