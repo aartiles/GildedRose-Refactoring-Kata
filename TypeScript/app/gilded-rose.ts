@@ -2,17 +2,24 @@ export class Item {
     name: string;
     sellIn: number;
     quality: number;
+    private good: Good;
 
     constructor(name, sellIn, quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
+        if (name === 'Aged Brie') {
+            this.good = new AgedBrie(name, sellIn, quality);
+        }
+        else this.good = new Good(name, sellIn, quality);
     }
 
     update() {
         this.updateSellIn();
         if (this.name === 'Aged Brie') {
-            this.updateAgedBrie();
+            this.good.update();
+            this.quality = this.good.quality();
+            this.sellIn = this.good.sellIn();
         }
         else if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
             this.updateBackstagePasses();
@@ -57,6 +64,46 @@ export class Item {
         if (this.name !== 'Sulfuras, Hand of Ragnaros') {
             this.sellIn = this.sellIn - 1;
         }
+    }
+}
+
+class Good {
+    constructor(readonly _name: string, protected _sellIn: number, protected _quality: number) {}
+
+    update(): void {
+        this.updateSellIn();
+        this.decreaseQuality();
+        if (this._sellIn < 0) this.decreaseQuality();
+    }
+
+    sellIn(): number {
+        return this._sellIn;
+    }
+
+    quality(): number {
+        return this._quality;
+    }
+
+    protected increaseQuality() {
+        if (this._quality < 50) this._quality = this._quality + 1;
+    }
+
+    private decreaseQuality() {
+        if (this._quality > 0) this._quality = this._quality - 1;
+    }
+
+    protected updateSellIn() {
+        this._sellIn = this._sellIn - 1;
+    }
+
+
+}
+
+class AgedBrie extends Good {
+    update() {
+        this.updateSellIn();
+        this.increaseQuality();
+        if (this._sellIn < 0) this.increaseQuality();
     }
 }
 
