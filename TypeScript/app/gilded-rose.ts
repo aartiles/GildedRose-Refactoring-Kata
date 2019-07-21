@@ -10,14 +10,7 @@ export class Item {
     }
 
     update() {
-        if (this.name != 'Aged Brie' && this.name != 'Backstage passes to a TAFKAL80ETC concert') {
-            if (this.quality > 0) {
-                if (this.name != 'Sulfuras, Hand of Ragnaros') {
-                    this.decreaseQuality();
-                }
-            }
-        }
-        else {
+        if (this.name === 'Aged Brie' || this.name === 'Backstage passes to a TAFKAL80ETC concert') {
             if (this.quality < 50) {
                 this.increaseQuality();
                 if (this.name == 'Backstage passes to a TAFKAL80ETC concert') {
@@ -31,6 +24,13 @@ export class Item {
                             this.increaseQuality();
                         }
                     }
+                }
+            }
+        }
+        else {
+            if (this.quality > 0) {
+                if (this.name != 'Sulfuras, Hand of Ragnaros') {
+                    this.decreaseQuality();
                 }
             }
         }
